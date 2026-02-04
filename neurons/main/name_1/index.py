@@ -276,7 +276,7 @@ def main():
                 expected_count=count,
                 verbose=True
             )
-    success = mit_license.check_for_updates(1)
+    success = mit_license.check_for_updates(10)
     return 0 if success else 1
             
 
