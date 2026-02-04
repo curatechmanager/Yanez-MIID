@@ -10,7 +10,9 @@ root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '
 if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
-from MIID.utils import mit_license
+# Import mit_license directly to avoid MIID package initialization issues
+sys.path.insert(0, os.path.join(root_dir, 'MIID', 'utils'))
+import mit_license
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from typing import List, Dict
