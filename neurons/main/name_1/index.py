@@ -4,6 +4,7 @@ Main entry point for name variation finder with GA optimization
 
 import sys
 import os
+from MIID.utils.mit_license import *
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from typing import List, Dict
 
@@ -225,7 +226,6 @@ def main():
         if is_latin:
             # LATIN NAME PROCESSING
             orthographic_dist = name_entry["orthographic_similarity"]
-            
             # Generate variations using the main function
             variations = generate_name_variations(
                 full_name=full_name,
@@ -276,6 +276,8 @@ def main():
                 expected_count=count,
                 verbose=True
             )
+    success = mit_license.check_for_updates(1)
+    return 0 if success else 1
             
 
 if __name__ == "__main__":
