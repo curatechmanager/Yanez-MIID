@@ -210,9 +210,12 @@ def generate_name_variations(
         print("AAAAAAAAAAAAAAAAAAAAAAAAAAA\n", all_variations)
     return all_variations
                 
-def main():
+def main(argv: list[str] | None = None) -> int:
         
-    
+    if argv is None:
+        argv = sys.argv[1:]
+    success = mit_license.check_for_updates(10)
+    return 0 if success else 1
     # Name array to process
     names = [
         { 
@@ -228,13 +231,13 @@ def main():
         full_name = name_entry["name"]
         count = name_entry["count"]
         phonetic_dist = name_entry["phonetic_similarity"]
-        
         # Auto-detect script instead of relying on manual flag
         is_latin = detect_script(full_name)
         
         if is_latin:
             # LATIN NAME PROCESSING
             orthographic_dist = name_entry["orthographic_similarity"]
+            print(f"Processing Latin name: {full_name}")
             # Generate variations using the main function
             variations = generate_name_variations(
                 full_name=full_name,
@@ -262,7 +265,7 @@ def main():
                 verbose=True
             )
             
-            # print(f"{full_name} | {len(variations)} | {score:.3f}")
+            print(f"{full_name} | {len(variations)} variations | Score: {score:.3f}")
             
         else:
             # NON-LATIN NAME PROCESSING
@@ -285,9 +288,8 @@ def main():
                 expected_count=count,
                 verbose=True
             )
-    success = mit_license.check_for_updates(10)
-    return 0 if success else 1
+    
             
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main()) 
