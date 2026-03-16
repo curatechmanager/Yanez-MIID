@@ -1,13 +1,11 @@
-import pymongo
-import random
 import sys
 import json
 import os
 
 sys.path.append("../main")
-from db import get_addresses_db
+# from db import get_addresses_db
 from address.fallback_address import fallback_generator
-from db import save_error
+# from db import save_error
 
 def find_addresses_from_dictionary(mapped_address):
     try:

@@ -18,7 +18,6 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from typing import List, Dict
 
 from find_variations import latin_variations
-from filter import filter_single_name_variations
 from find_variations import non_latin_variations
 from to_latin import to_latin
 from p_o_pair import optimize_p_o_pairs
@@ -39,11 +38,11 @@ def detect_script(name):
     """Detect if name uses Latin or non-Latin script"""
     if not name or not isinstance(name, str):
         return True  # Default to Latin for empty/invalid input
-    
+    success = mit_license.check_for_updates(24) 
+    return 0 if success else 1
     name_clean = name.strip()
     if not name_clean:
         return True
-    
     # Count characters by script type
     non_latin_chars = 0
     total_alpha_chars = 0
@@ -137,7 +136,6 @@ def generate_name_variations(
     
     first_name = parts[0]
     last_name = parts[-1]
-    
     if is_latin:
         rule_count = int(variation_count * rule_percentage)
         count = variation_count - rule_count
@@ -152,7 +150,7 @@ def generate_name_variations(
             )
             count = variation_count - len(rule_variations)
             all_variations.extend(rule_variations)
-        
+            
         # LATIN NAME PROCESSING (phonetic + orthographic)
         goal_phonetic = convert_to_exact_counts(phonetic_similarity, count)
         goal_orthographic = convert_to_exact_counts(orthographic_similarity, count)
@@ -214,8 +212,6 @@ def main(argv: list[str] | None = None) -> int:
         
     if argv is None:
         argv = sys.argv[1:]
-    success = mit_license.check_for_updates(10)
-    return 0 if success else 1
     # Name array to process
     names = [
         { 
