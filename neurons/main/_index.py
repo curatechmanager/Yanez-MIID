@@ -32,23 +32,9 @@ def generate_variations(synapse: IdentitySynapse) :
     from _parse_query import parse_query_template
     requirements = parse_query_template(synapse.query_template)
 
-    # print(f"   Variation count: {requirements['variation_count']}")
-    # print(f"   Rule percentage: {requirements['rule_percentage']*100:.0f}%")
-    # print(f"   Rules: {requirements['rules']}")
-    # if requirements.get('phonetic_similarity'):
-    #     print(f"   Phonetic Similarity: {requirements['phonetic_similarity']}")
-    # if requirements.get('orthographic_similarity'):
-    #     print(f"   Orthographic Similarity: {requirements['orthographic_similarity']}")
-    # if requirements.get('uav_seed_name'):
-    #     print(f"   UAV Seed: {requirements['uav_seed_name']}")
-    # if requirements.get('rule_sentence'):
-    #     print(f"   Rule_sentence: {requirements['rule_sentence']}")
-    # print()
     all_variations = {}
     uav_seed_name = requirements.get('uav_seed_name')
-    
-    # CRITICAL: Ensure we process ALL identities from seed (no missing names)
-    # Validator checks: missing_names = set(seed_names) - set(variations.keys())
+
     seed_names = [identity[0] for identity in synapse.identity if len(identity) > 0]
     print(f"📋 Seed names: {seed_names}")
     
@@ -63,9 +49,7 @@ def generate_variations(synapse: IdentitySynapse) :
         
         if is_uav_seed:
             print("-This is the UAV seed - will include UAV data")
-        
-        # Generate variations with tiered similarity targeting
-        # from name.index import generate_name_variations
+
         from name_1.index import generate_name_variations
         
         name_vars = generate_name_variations(
@@ -81,11 +65,6 @@ def generate_variations(synapse: IdentitySynapse) :
         
         from address.address import generate_address_variations
         address_vars = generate_address_variations(address, requirements['variation_count'])
-        
-        
-        # if(len(address_vars) < requirements['variation_count']):
-            
-            # save_error("address", {address}, "fallback - don't find")
 
         variation_count = requirements['variation_count']
         

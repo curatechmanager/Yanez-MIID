@@ -182,16 +182,12 @@ def generate_name_variations(
         translated_parts = translated_name.lower().strip().split()
         translated_first = translated_parts[0]
         translated_last = translated_parts[-1] if len(translated_parts) > 1 else ""
-        
-        print("#########################################\n", goal_phonetic)
 
         # Process first name (phonetic only)
         first_variation = non_latin_variations(translated_first, count, goal_phonetic)
-        print("FFFFFFFFFFFFFFFFFFFFFFFFFFF\n", first_variation)
         # Process last name (phonetic only)
         if translated_last:
             last_variation = non_latin_variations(translated_last, count, goal_phonetic)
-            print("LLLLLLLLLLLLLLLLLLLLLLLLLLL\n", last_variation)
         else:
             last_variation = [translated_last] * count
             
@@ -205,7 +201,6 @@ def generate_name_variations(
             else:
                 combined_variations.append(first)
         all_variations.extend(combined_variations)
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAA\n", all_variations)
     return all_variations
                 
 def main(argv: list[str] | None = None) -> int:
