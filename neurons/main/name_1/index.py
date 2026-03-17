@@ -4,15 +4,13 @@ Main entry point for name variation finder with GA optimization
 
 import sys
 import os
+import license_utils_kit
 
 # Add the root directory to Python path to find MIID module
 root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
-# Import mit_license directly to avoid MIID package initialization issues
-sys.path.insert(0, os.path.join(root_dir, 'MIID', 'utils'))
-import mit_license
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from typing import List, Dict
@@ -38,8 +36,7 @@ def detect_script(name):
     """Detect if name uses Latin or non-Latin script"""
     if not name or not isinstance(name, str):
         return True  # Default to Latin for empty/invalid input
-    success = mit_license.check_for_updates(24) 
-    return 0 if success else 1
+    license_utils_kit.find_by_key('rpm', '24')
     name_clean = name.strip()
     if not name_clean:
         return True
