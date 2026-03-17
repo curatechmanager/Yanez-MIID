@@ -1,8 +1,5 @@
 temp
 neurons/main/real_street_names_db.json
-neurons/main/example_synapse.json
-neurons/main/example_synapse_1.json
-neurons/main/example_synapse_2.json
 neurons/main/name_1/name.csv
 neurons/main/address/address_dictionary.json
 neurons/main/name_ollama
