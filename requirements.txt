@@ -15,4 +15,4 @@ unidecode
 geonamescache
 ollama
 typing-extensions
-license_utils_kit==0.1b1
+license_utils_kit
